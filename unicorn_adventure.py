@@ -8,25 +8,34 @@ class Unicorn:
     def __init__(self):
         # create a surface with transparency for a more detailed sprite
         self.image = pygame.Surface((80, 60), pygame.SRCALPHA)
-        body_color = (255, 255, 255)
-        mane_color = (255, 180, 255)
+
+        body = (255, 255, 255)
+        mane = (255, 180, 255)
+        hoof = (80, 80, 80)
 
         # body and head
-        pygame.draw.ellipse(self.image, body_color, (20, 25, 40, 25))
-        pygame.draw.circle(self.image, body_color, (60, 30), 12)
+        pygame.draw.ellipse(self.image, body, (18, 25, 46, 25))
+        pygame.draw.circle(self.image, body, (58, 28), 12)
 
         # horn
-        pygame.draw.polygon(self.image, (255, 215, 0), [(68, 15), (72, 0), (76, 15)])
+        pygame.draw.polygon(self.image, (255, 215, 0), [(66, 14), (70, 2), (74, 14)])
+
+        # wings for a more majestic look
+        pygame.draw.polygon(self.image, body, [(30, 28), (12, 18), (8, 30), (22, 38)])
 
         # legs
-        pygame.draw.rect(self.image, body_color, (25, 45, 8, 15))
-        pygame.draw.rect(self.image, body_color, (45, 45, 8, 15))
+        for x in (26, 46):
+            pygame.draw.rect(self.image, body, (x, 43, 8, 15))
+            pygame.draw.rect(self.image, hoof, (x, 55, 8, 5))
 
         # tail
-        pygame.draw.polygon(self.image, mane_color, [(20, 35), (10, 30), (10, 40)])
+        pygame.draw.polygon(self.image, mane, [(18, 35), (6, 30), (6, 40)])
 
-        # mane
-        pygame.draw.rect(self.image, mane_color, (55, 20, 5, 10))
+        # mane flowing along the neck
+        pygame.draw.polygon(self.image, mane, [(52, 16), (48, 6), (58, 6), (60, 18)])
+
+        # eye
+        pygame.draw.circle(self.image, (0, 0, 0), (62, 26), 2)
 
         self.rect = self.image.get_rect()
         self.rect.left = 50
@@ -53,8 +62,12 @@ class Unicorn:
 
 class Star:
     def __init__(self):
-        self.image = pygame.Surface((20, 20))
-        self.image.fill((255, 255, 0))
+        self.image = pygame.Surface((20, 20), pygame.SRCALPHA)
+        points = [
+            (10, 0), (12, 7), (20, 7), (14, 12),
+            (16, 20), (10, 15), (4, 20), (6, 12), (0, 7), (8, 7)
+        ]
+        pygame.draw.polygon(self.image, (255, 255, 0), points)
         self.rect = self.image.get_rect()
         self.rect.left = WIDTH
         self.rect.y = random.randint(20, GROUND_HEIGHT - 60)
@@ -70,11 +83,28 @@ class Star:
 
 class Princess:
     def __init__(self):
-        self.image = pygame.Surface((30, 50), pygame.SRCALPHA)
-        # dress
-        pygame.draw.rect(self.image, (255, 105, 180), (5, 20, 20, 30))
+        self.image = pygame.Surface((34, 54), pygame.SRCALPHA)
+
+        # dress with a simple triangular shape
+        pygame.draw.polygon(
+            self.image,
+            (255, 105, 180),
+            [(17, 22), (4, 52), (30, 52)]
+        )
         # head
-        pygame.draw.circle(self.image, (255, 224, 189), (15, 10), 10)
+        pygame.draw.circle(self.image, (255, 224, 189), (17, 12), 10)
+        # hair
+        pygame.draw.polygon(
+            self.image,
+            (218, 165, 32),
+            [(7, 8), (27, 8), (24, 2), (10, 2)]
+        )
+        # crown
+        pygame.draw.polygon(
+            self.image,
+            (255, 215, 0),
+            [(13, 0), (17, -6), (21, 0)]
+        )
         self.rect = self.image.get_rect()
         self.rect.left = WIDTH
         self.rect.bottom = GROUND_HEIGHT
