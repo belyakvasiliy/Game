@@ -1,7 +1,13 @@
-# В терминале:
-git init
-git add .
-git commit -m "Initial commit"
-git branch -M main
-git remote add origin https://github.com/ТВОЙ_ЮЗЕРНЕЙМ/ИМЯ_РЕПО.git
-git push -u origin main
+# Простая игра "Крестики-нолики"
+
+Этот репозиторий содержит консольную игру "Крестики-нолики" на языке Python.
+
+## Запуск
+
+Убедитесь, что у вас установлен Python 3. Затем выполните:
+
+```bash
+python3 tic_tac_toe.py
+```
+
+Следуйте подсказкам в терминале, чтобы играть против простого компьютера.
